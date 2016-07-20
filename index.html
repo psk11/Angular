@@ -1,0 +1,59 @@
+<html ng-app="store">
+<head>
+  <title></title>
+  <link rel="stylesheet" type="text/css" src="scrips/css/bootstrap.min.css">
+  <style type="text/css">
+    .ng-invalid.ng-dirty {
+      border-color: #FA787E;
+    }
+    .ng-valid.ng-dirty{
+      border-color: #78FA;
+    }
+  </style>
+</head>
+<body ng-controller="StoreController as store">
+  <script type="text/javascript" src="scripts/js/angular.min.js"></script>
+  <script type="text/javascript" src="modules/app.js"></script>
+  <div ng-repeat="product in store.products">
+    <!-- <h1>{{ product.name }}</h1>
+    <h2>{{ product.price | currency }}</h2>
+    <p>{{ product.description }}</p>
+    <img ng-src="{{ product.images[0].thumb }}">
+    <button ng-show="product.canPurchase">Add to Cart</button> -->
+    <section ng-controller="PanelController as panel">
+      <ul class="nav nav-pills">
+        <li ng-class"{active:panel.isSelected(1)}">
+          <a href ng-click="panel.selectTab(1)">Description</a>
+        </li>
+        <li ng-class"{active:panel.isSelected(2)}">
+          <a href ng-click="panel.selectTab(2)">Specifications</a>
+        </li>
+        <li ng-class"{active:panel.isSelected(3)}">
+          <a href ng-click="panel.selectTab(3)">Reviews</a>
+        </li>
+      </ul>
+      <div class="panel" ng-show="panel.tab === 1">
+        <h4>Description</h4>
+        <p>{{ product.description }}</p>
+      </div>
+      <div class="panel" ng-show="panel.tab === 2">
+        <h4>Specifications</h4>
+        <blockquote>Not Yet</blockquote>
+      </div>
+      <div class="panel" ng-show="panel.tab === 3">
+        <h4>Reviews</h4>
+        <div ng-repeat="review in product.reviews">
+          <blockquote>
+          <b>Stars: {{ review.stars }}</b>
+          <p>{{ review.body }}</p>
+          <h5>By: {{ review.author }}</h5>
+          </blockquote>
+        </div>
+        
+        <reviewForm></reviewForm>
+
+      </div>
+    </section>
+  </div>
+</body>
+</html>
